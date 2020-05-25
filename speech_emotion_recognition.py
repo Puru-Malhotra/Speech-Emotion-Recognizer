@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[11]:
+
 
 
 import librosa
@@ -13,7 +13,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 
 
-# In[30]:
 
 
 def extract_feature(file_name, mfcc, chroma, mel):
@@ -35,8 +34,6 @@ def extract_feature(file_name, mfcc, chroma, mel):
         return result    
 
 
-# In[3]:
-
 
 emotions = {
     '01' : 'neutral',
@@ -52,7 +49,6 @@ emotions = {
 observed_emotions = ['calm', 'happy', 'fearful', 'disgust']
 
 
-# In[34]:
 
 
 def load_data(test_size = 0.2):
@@ -68,50 +64,42 @@ def load_data(test_size = 0.2):
     return train_test_split(np.array(x), y, test_size = test_size, random_state = 9)    
 
 
-# In[35]:
 
 
 x_train, x_test, y_train, y_test = load_data(test_size = 0.25)
 
 
-# In[36]:
 
 
 print(x_train.shape[0], x_test.shape[0])
 
 
-# In[38]:
 
 
 print(f'Number of features extracted : {x_train.shape[1]}')
 
 
-# In[39]:
 
 
 model = MLPClassifier(alpha = 0.01, batch_size = 256, epsilon = 1e-08, hidden_layer_sizes=(300,), learning_rate = 'adaptive', max_iter = 500)
 
 
-# In[40]:
 
 
 model.fit(x_train, y_train)
 
 
-# In[41]:
 
 
 y_pred = model.predict(x_test)
 
 
-# In[43]:
 
 
 accuracy = accuracy_score(y_true = y_test, y_pred = y_pred)
 print('Accuracy : {:.2f}%'.format(accuracy *100))
 
 
-# In[ ]:
 
 
 
